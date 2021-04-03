@@ -26,8 +26,8 @@ centerrow = nrows - 3  # controls front_back tilt
 centercol = 3  # controls left_right tilt / tenting (higher number is more tenting)
 tenting_angle = pi / 12.0  # or, change this for more precise tenting control
 
-#symmetry states if it is a symmetric or asymmetric build.  If asymmetric it doubles the generation time.
-symmetry = "symmetric" # "asymmetric" or "symmetric"
+# symmetry states if it is a symmetric or asymmetric build.  If asymmetric it doubles the generation time.
+symmetry = "symmetric"  # "asymmetric" or "symmetric"
 
 if nrows > 5:
     column_style = "orthographic"
@@ -99,6 +99,7 @@ if hot_swap:
     plate_file = path.join("..", "src", r"hot_swap_plate.stl")
     # plate_offset = plate_thickness - 5.25
     plate_offset = 0.0
+
 
 def single_plate(cylinder_segments=100, side="right"):
     top_wall = sl.cube([keyswitch_width + 3, 1.5, plate_thickness], center=True)
@@ -1257,7 +1258,9 @@ def wire_posts():
 
 
 def model_side(side="right"):
-    shape = sl.union()(key_holes(side=side), connectors(), thumb(side=side), thumb_connectors(),)
+    shape = sl.union()(
+        key_holes(side=side), connectors(), thumb(side=side), thumb_connectors(),
+    )
 
     s2 = sl.union()(case_walls(), screw_insert_outers(), teensy_holder(), usb_holder(),)
 
@@ -1272,15 +1275,14 @@ def model_side(side="right"):
 
     return shape
 
+
 mod_r = model_side(side="right")
 
 sl.scad_render_to_file(mod_r, path.join(r"..", "things", r"right_py.scad"))
 
 if symmetry == "asymmetric":
     mod_l = model_side(side="left")
-    sl.scad_render_to_file(
-        mod_l, path.join(r"..", "things", r"left_py.scad")
-    )
+    sl.scad_render_to_file(mod_l, path.join(r"..", "things", r"left_py.scad"))
 else:
     sl.scad_render_to_file(
         sl.mirror([-1, 0, 0])(mod_r), path.join(r"..", "things", r"left_py.scad")
