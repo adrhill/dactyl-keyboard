@@ -8,10 +8,6 @@ ROOT_DIR = os.path.abspath(os.curdir)
 ASSET_DIR = os.path.join(ROOT_DIR, "assets")
 
 
-def rad2deg(rad: float) -> float:
-    return rad * 180 / pi
-
-
 # ######################
 # ## Shape parameters ##
 # ######################
