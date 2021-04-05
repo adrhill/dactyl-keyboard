@@ -96,7 +96,7 @@ plate_offset = 0.0
 
 if hot_swap:
     symmetry = "asymmetric"
-    plate_file = path.join("..", "src", r"hot_swap_plate.stl")
+    plate_file = path.join(ASSET_DIR, r"hot_swap_plate.stl")
     # plate_offset = plate_thickness - 5.25
     plate_offset = 0.0
 
@@ -1278,14 +1278,14 @@ def model_side(side="right"):
 
 mod_r = model_side(side="right")
 
-sl.scad_render_to_file(mod_r, path.join(r"..", "things", r"right_py.scad"))
+sl.scad_render_to_file(mod_r, path.join(ROOT_DIR, "scad", r"right_py.scad"))
 
 if symmetry == "asymmetric":
     mod_l = model_side(side="left")
-    sl.scad_render_to_file(mod_l, path.join(r"..", "things", r"left_py.scad"))
+    sl.scad_render_to_file(mod_l, path.join(ROOT_DIR, "scad", r"left_py.scad"))
 else:
     sl.scad_render_to_file(
-        sl.mirror([-1, 0, 0])(mod_r), path.join(r"..", "things", r"left_py.scad")
+        sl.mirror([-1, 0, 0])(mod_r), path.join(ROOT_DIR, "scad", r"left_py.scad")
     )
 
 
@@ -1306,4 +1306,4 @@ def baseplate():
     return sl.projection(cut=True)(shape)
 
 
-sl.scad_render_to_file(baseplate(), path.join(r"..", "things", r"plate_py.scad"))
+sl.scad_render_to_file(baseplate(), path.join(ROOT_DIR, "scad", r"plate_py.scad"))
