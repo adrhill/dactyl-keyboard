@@ -10,3 +10,9 @@
 /target
 .idea/
 /scad
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode
