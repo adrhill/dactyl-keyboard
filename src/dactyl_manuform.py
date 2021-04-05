@@ -22,7 +22,8 @@ centerrow = nrows - 3  # controls front_back tilt
 centercol = 3  # controls left_right tilt / tenting (higher number is more tenting)
 tenting_angle = np.pi / 12.0  # or, change this for more precise tenting control
 
-# symmetry states if it is a symmetric or asymmetric build.  If asymmetric it doubles the generation time.
+# symmetry states if it is a symmetric or asymmetric build.
+# If asymmetric it doubles the generation time.
 symmetry = "symmetric"  # "asymmetric" or "symmetric"
 
 if nrows > 5:
@@ -50,33 +51,43 @@ keyboard_z_offset = (
 extra_width = 2.5  # extra space between the base of keys# original= 2
 extra_height = 1.0  # original= 0.5
 
+# offset in the x and/or y direction for the first
+# downward_sloping part of the wall (negative):
+wall_xy_offset = 5
 wall_z_offset = -15  # length of the first downward_sloping part of the wall (negative)
-wall_xy_offset = 5  # offset in the x and/or y direction for the first downward_sloping part of the wall (negative)
 wall_thickness = 2  # wall thickness parameter# originally 5
 
-## Settings for column_style == :fixed
-## The defaults roughly match Maltron settings
-##   http://patentimages.storage.googleapis.com/EP0219944A2/imgf0002.png
-## fixed_z overrides the z portion of the column ofsets above.
-## NOTE: THIS DOESN'T WORK QUITE LIKE I'D HOPED.
-fixed_angles = [deg2rad(10), deg2rad(10), 0, 0, 0, deg2rad(-15), deg2rad(-15)]
+# Settings for column_style == :fixed
+# The defaults roughly match Maltron settings
+#   http://patentimages.storage.googleapis.com/EP0219944A2/imgf0002.png
+# fixed_z overrides the z portion of the column ofsets above.
+# NOTE: THIS DOESN'T WORK QUITE LIKE I'D HOPED.
+fixed_angles = [
+    np.deg2rad(10),
+    np.deg2rad(10),
+    0,
+    0,
+    0,
+    np.deg2rad(-15),
+    np.deg2rad(-15),
+]
 fixed_x = [-41.5, -22.5, 0, 20.3, 41.4, 65.5, 89.6]  # relative to the middle finger
 fixed_z = [12.1, 8.3, 0, 5, 10.7, 14.5, 17.5]
 fixed_tenting = np.deg2rad(0)
 
-#######################
-## General variables ##
-#######################
+#####################
+# General variables #
+#####################
 
 lastrow = nrows - 1
 cornerrow = lastrow - 1
 lastcol = ncols - 1
 
-#################
-## Switch Hole ##
-#################
+###############
+# Switch Hole #
+###############
 
-keyswitch_height = 14.4  ## Was 14.1, then 14.25
+keyswitch_height = 14.4  # Was 14.1, then 14.25
 keyswitch_width = 14.4
 
 sa_profile_key_height = 12.7
@@ -137,9 +148,9 @@ def single_plate(cylinder_segments=100, side="right"):
     return plate
 
 
-################
-## SA Keycaps ##
-################
+##############
+# SA Keycaps #
+##############
 
 sa_length = 18.25
 sa_double_length = 37.5
@@ -178,9 +189,9 @@ def sa_cap(Usize=1):
     return key_cap
 
 
-#########################
-## Placement Functions ##
-#########################
+#######################
+# Placement Functions #
+#######################
 
 
 def rotate_around_x(position, angle):
@@ -312,9 +323,9 @@ def caps():
     return sl.union()(*caps)
 
 
-####################
-## Web Connectors ##
-####################
+##################
+# Web Connectors #
+##################
 
 web_thickness = 3.5
 post_size = 0.1
@@ -396,9 +407,9 @@ def connectors():
     return sl.union()(*hulls)
 
 
-############
-## Thumbs ##
-############
+##########
+# Thumbs #
+##########
 
 
 def thumborigin():
@@ -664,9 +675,9 @@ def thumb_connectors():
     return sl.union()(*hulls)
 
 
-##########
-## Case ##
-##########
+########
+# Case #
+########
 
 
 def bottom_hull(p, height=0.001):
