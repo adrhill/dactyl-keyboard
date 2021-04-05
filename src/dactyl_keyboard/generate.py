@@ -13,8 +13,8 @@ ASSET_DIR = os.path.join(ROOT_DIR, "assets")
 # ######################
 
 
-nrows = 6  # key rows
-ncols = 6  # key columns
+nrows = 4  # key rows
+ncols = 5  # key columns
 
 alpha = np.pi / 12.0  # curvature of the columns
 beta = np.pi / 36.0  # curvature of the rows
@@ -96,7 +96,7 @@ plate_thickness = 4
 mount_width = keyswitch_width + 3
 mount_height = keyswitch_height + 3
 
-hot_swap = False
+hot_swap = True
 
 plate_file = None
 plate_offset = 0.0
