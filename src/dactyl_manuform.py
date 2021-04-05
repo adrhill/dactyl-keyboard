@@ -1,11 +1,11 @@
-import solid as sl
-import numpy as np
-from numpy import pi
+import os
 import os.path as path
 
+import numpy as np
+import solid as sl
 
-def deg2rad(degrees: float) -> float:
-    return degrees * pi / 180
+ROOT_DIR = os.path.abspath(os.curdir)
+ASSET_DIR = os.path.join(ROOT_DIR, "assets")
 
 
 def rad2deg(rad: float) -> float:
@@ -20,11 +20,11 @@ def rad2deg(rad: float) -> float:
 nrows = 6  # key rows
 ncols = 6  # key columns
 
-alpha = pi / 12.0  # curvature of the columns
-beta = pi / 36.0  # curvature of the rows
+alpha = np.pi / 12.0  # curvature of the columns
+beta = np.pi / 36.0  # curvature of the rows
 centerrow = nrows - 3  # controls front_back tilt
 centercol = 3  # controls left_right tilt / tenting (higher number is more tenting)
-tenting_angle = pi / 12.0  # or, change this for more precise tenting control
+tenting_angle = np.pi / 12.0  # or, change this for more precise tenting control
 
 # symmetry states if it is a symmetric or asymmetric build.  If asymmetric it doubles the generation time.
 symmetry = "symmetric"  # "asymmetric" or "symmetric"
@@ -66,7 +66,7 @@ wall_thickness = 2  # wall thickness parameter# originally 5
 fixed_angles = [deg2rad(10), deg2rad(10), 0, 0, 0, deg2rad(-15), deg2rad(-15)]
 fixed_x = [-41.5, -22.5, 0, 20.3, 41.4, 65.5, 89.6]  # relative to the middle finger
 fixed_z = [12.1, 8.3, 0, 5, 10.7, 14.5, 17.5]
-fixed_tenting = deg2rad(0)
+fixed_tenting = np.deg2rad(0)
 
 #######################
 ## General variables ##
@@ -113,7 +113,7 @@ def single_plate(cylinder_segments=100, side="right"):
     )(left_wall)
 
     side_nub = sl.cylinder(1, 2.75, segments=cylinder_segments, center=True)
-    side_nub = sl.rotate(rad2deg(pi / 2), [1, 0, 0])(side_nub)
+    side_nub = sl.rotate(np.rad2deg(np.pi / 2), [1, 0, 0])(side_nub)
     side_nub = sl.translate((keyswitch_width / 2, 0, 1))(side_nub)
     nub_cube = sl.cube([1.5, 2.75, plate_thickness], center=True)
     nub_cube = sl.translate(
@@ -271,11 +271,11 @@ def translate(shape, xyz):
 
 
 def x_rot(shape, angle):
-    return sl.rotate(rad2deg(angle), [1, 0, 0])(shape)
+    return sl.rotate(np.rad2deg(angle), [1, 0, 0])(shape)
 
 
 def y_rot(shape, angle):
-    return sl.rotate(rad2deg(angle), [0, 1, 0])(shape)
+    return sl.rotate(np.rad2deg(angle), [0, 1, 0])(shape)
 
 
 def key_place(shape, column, row):
@@ -491,7 +491,7 @@ def double_plate():
 
 def thumbcaps():
     t1 = thumb_1x_layout(sa_cap(1))
-    t15 = thumb_15x_layout(sl.rotate(pi / 2, [0, 0, 1])(sa_cap(1.5)))
+    t15 = thumb_15x_layout(sl.rotate(np.pi / 2, [0, 0, 1])(sa_cap(1.5)))
     return t1 + t15
 
 
